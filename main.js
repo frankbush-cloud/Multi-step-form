@@ -31,16 +31,19 @@ const chosenPlanText = document.querySelector(".chosen-plan-text");
 const chosenPlanPrice = document.querySelector(".chosen-plan-price");
 const addOnline = document.getElementById("add-online");
 const addStorage = document.getElementById("add-storage");
+const addCustom = document.getElementById("add-custom")
 // const addCustom = docment.getElementById("add-custom");
 const addPickedText1 = document.getElementById("add-picked-text1");
 const addPickedText2 = document.getElementById("add-picked-text2");
 const addPickedPrice1 = document.getElementById("add-picked-price1")
 const addPickedPrice2= document.getElementById("add-picked-price2");
+const addPickedText3 = document.getElementById("add-picked-text3");
+const addPickedPrice3 = document.getElementById("add-picked-price3");
 const change = document.getElementById("change");
 
 
 
-change.addEventListener("click", gotostep2)
+change.addEventListener("click", changeplan)
 toStep2.addEventListener("click", gotostep2)
 toStepOne.addEventListener("click", gobacktostepone)
 toStep3.addEventListener("click", gotostep3)
@@ -59,6 +62,7 @@ advancedDiv.addEventListener("click", toadvancePlan);
 proDiv.addEventListener("click", toproplan);
 addOnline.addEventListener("click", toonlineadd);
 addStorage.addEventListener("click", tostorageadd);
+addCustom.addEventListener("click", tocustomadd);
 
 // addCustom.addEventListener("click", tocustomadd);
 //function to go to step2
@@ -74,7 +78,17 @@ function gotostep2(){
         event.preventDefault();
     }
 }
+//change plan and add
+function changeplan(){
+    gotostep2() 
+    var planCostText = document.getElementById("total-plan-price");
+    addPickedPrice1.innerText = "$00.00";
+    addPickedPrice2.innerText = "$00.00";
+    addPickedPrice3.innerText = "$00.00";
+    planCostText.innerText = "$00.00";
+    chosenPlanPrice.innerText = "$00.00"
 
+}
 
 //function to go back to step1
 function gobacktostepone(){
@@ -167,7 +181,7 @@ function fillAllInputs(){
     var nameInput = document.getElementById("name");
     var emailInput = document.getElementById("email")
     var numberInput = document.getElementById("phone-number")
-    if(nameInput.value == ""){
+    if(nameInput.value === ""){
         var nameError = document.getElementById("name-error");
         nameError.innerHTML = 'Must include Name'
        
@@ -321,45 +335,58 @@ if(arcadePrice.innerText === "$90/month"){
 // to online-add
  function toonlineadd(){
     addPickedText1.innerText = "Online Service";
-    addPickedText2.innerText = "Larger Storage";
+    // addPickedText2.innerText = "Larger Storage";
     var onlineAddPrice = document.getElementById("online-add-price")
-   var storageAddPrice = document.getElementById("storage-add-price");
-   
+    //var storageAddPrice = document.getElementById("storage-add-price");
     var grossOnlinePrice =  onlineAddPrice.innerText;
-    var grossStoragePrice = storageAddPrice.innerText;
+    // var grossStoragePrice = storageAddPrice.innerText;
     addPickedPrice1.innerHTML = grossOnlinePrice
-    addPickedPrice2.innerHTML = grossStoragePrice
+    // addPickedPrice2.innerHTML = grossStoragePrice
     
     totalplancost()
  }
 
-function tostorageadd(){
 
-    var onlineAddPrice = document.getElementById("online-add-price");
+ // to storage-add
+function tostorageadd(){
+    // var onlineAddPrice = document.getElementById("online-add-price");
     var storageAddPrice = document.getElementById("storage-add-price");
-    var grossOnlinePrice =  onlineAddPrice.innerText;
+    // var grossOnlinePrice =  onlineAddPrice.innerText;
     var grossStoragePrice = storageAddPrice.innerText;
-    addPickedPrice1.innerHTML = grossOnlinePrice
+    // addPickedPrice1.innerHTML = grossOnlinePrice
     addPickedPrice2.innerHTML = grossStoragePrice
+    addPickedText2.innerHTML = "Larger Storage"
     totalplancost()
 }
 
-
+// to custom-add
+function tocustomadd(){
+    var customAddPrice = document.getElementById("custom-add-price")
+    var grossCustomPrice = customAddPrice.innerText
+    addPickedPrice3.innerHTML = grossCustomPrice;
+    addPickedText3.innerHTML = "Customizable Profile"
+    totalplancost()
+}
 function totalplancost(){
-    var onlineAddPrice = document.getElementById("online-add-price");
-    var storageAddPrice = document.getElementById("storage-add-price");
+    // var onlineAddPrice = document.getElementById("online-add-price");
+    // var storageAddPrice = document.getElementById("storage-add-price");
+    // var customAddPrice = document.getElementById("custom-add-price")
 
-    var grossOnlinePrice =  onlineAddPrice.innerText;
-    var grossStoragePrice = storageAddPrice.innerText;
+    var grossCustomPrice = addPickedPrice3.innerText
+    var grossOnlinePrice =  addPickedPrice1.innerText;
+    var grossStoragePrice = addPickedPrice2.innerText;
 
     var grossPrice1 = chosenPlanPrice.innerHTML;
     var grossPrice2 = grossOnlinePrice
     var grossPrice3 = grossStoragePrice
+    var grossPrice4 = grossCustomPrice
     const netPrice1 = grossPrice1.replace(/\D/g, "");
     const netPrice2 = grossPrice2.replace(/\D/g, "");
     const netPrice3 = grossPrice3.replace(/\D/g, "");
-    var totalCost = netPrice1*1 + netPrice2*1 + netPrice3*1;
-   
+    const netPrice4 = grossPrice4.replace(/\D/g, "");
+
+    var totalCost = netPrice1*1 + netPrice2*1 + netPrice3*1 + netPrice4*1;
+    
 
     if(grossPrice1 === "$9/Month" || grossPrice1 === "$12/Month" || grossPrice1 === "$15/Month"){
         var netPlanCost = `+${totalCost}/month`;
@@ -376,3 +403,4 @@ function totalplancost(){
     // return totalPlanText;
 }
 
+console.log(nameInput.placeholder)
