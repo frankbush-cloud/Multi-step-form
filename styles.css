@@ -36,14 +36,13 @@ body{
 }
 .main-container{
     padding: 20px;
-    background: red;
-    border: 1px solid;
     width: 100%;
     border-radius: 10px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    margin-bottom: 2rem;
 }
 
 .mobile-img{
@@ -116,6 +115,9 @@ body{
 .info-head h1{
     font-size: 30px;
 }
+.info-head{
+   margin-bottom: 20px;
+}
 .info-head p{
     font-size: 18px;
     color: var(--Cool-gray)
@@ -178,7 +180,7 @@ input:focus{
     flex-direction: column;
     gap: 40px;
     border: 1px solid;
-    width: 200px;
+    /* width: 200px; */
     padding: 20px;
     border-radius: 10px;
     border-color: var(--Light-gray);
@@ -445,13 +447,13 @@ input:focus{
     .plan-categories{
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        gap: 40px;
     }
     .plan-detail{
         display: flex;
         flex-direction: row;
         align-items: center;
-        gap: 40px;
+        gap: 20px;
         border: 1px solid;
         width: 100%;
     }
@@ -468,5 +470,21 @@ input:focus{
         /* flex-wrap: wrap; */
         padding: 0;
         padding: 50px 5px 0 ;
+    }
+}
+
+@media (max-width: 396px){
+    
+    .plan-detail{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+       
+    }
+    .plan-price{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
     }
 }
