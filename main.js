@@ -40,6 +40,9 @@ const addPickedPrice2= document.getElementById("add-picked-price2");
 const addPickedText3 = document.getElementById("add-picked-text3");
 const addPickedPrice3 = document.getElementById("add-picked-price3");
 const change = document.getElementById("change");
+const nameError = document.getElementById("name-error");
+var emailError = document.getElementById("email-error");
+var numberError = document.getElementById("number-error");
 
 
 
@@ -72,11 +75,8 @@ function gotostep2(){
     step2Btn.style.backGround = "red";
     finishingUpSectionMon.classList.add("hide")
     changeBtn2();
-    fillAllInputs();
+    fillAllInputs()
 
-    if (fillAllInputs()== false){
-        event.preventDefault();
-    }
 }
 //change plan and add
 function changeplan(){
@@ -87,7 +87,6 @@ function changeplan(){
     addPickedPrice3.innerText = "$00.00";
     planCostText.innerText = "$00.00";
     chosenPlanPrice.innerText = "$00.00"
-
 }
 
 //function to go back to step1
@@ -95,6 +94,7 @@ function gobacktostepone(){
     PlanSection.classList.add("hide")
     PersonalInfoSection.classList.remove("hide")
     changeBtn1()
+    
 }
 
 //function to step3
@@ -180,31 +180,37 @@ function toStep4Section(){
 function fillAllInputs(){
     var nameInput = document.getElementById("name");
     var emailInput = document.getElementById("email")
-    var numberInput = document.getElementById("phone-number")
+    var numberInput = document.getElementById("phone-number");
+
     if(nameInput.value === ""){
-        var nameError = document.getElementById("name-error");
         nameError.innerHTML = 'Must include Name'
        
-    }else if(nameInput.value === !""){
-        nameError.innerHTML = ""
-        
-    }else if(!emailInput.value){
-        var emailError = document.getElementById("email-error");
+    }else{
+        nameError.innerHTML = "" 
+    }
+    
+    if(!emailInput.value){
         emailError.innerHTML = "Must include Email"
         
-    }else if(emailInput.value ===!""){
+    }else{
         emailError.innerHTML = ""
-        
-    }else if(!numberInput.value){
-        var numberError = document.getElementById("number-error");
-        numberError.innerHTML = "Must include Phone Number";
-        
-    }else if(numberInput.value === !""){
-        numberError.innerHTML = "";
-        
     }
 
+    if(!numberInput.value){
+        numberError.innerHTML = "Must include Phone Number";
     
+        
+    }else{
+        numberError.innerHTML = "";
+    }
+
+    if(!nameInput.value || !emailInput.value || !numberInput.value){
+       alert("Please fill the inputs")
+       return
+    }else{
+        gotostep2()
+    }
+
 }
 //change btn1-color
 function changeBtn1(){
